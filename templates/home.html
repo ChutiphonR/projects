@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนที่อาคาร</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <!-- เชื่อมต่อกับ leaflet-routing-machine -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main">
+        <div class="top-part">
+            <div class="logo">
+                <a href="/templates/index.html" target="_self" rel="noopener noreferrer">
+                    <img src="/static/img/64a3fe3230eb9.png" alt="Logo">
+                </a>
+            </div>
+            <div class="list-tower">
+                <div class="tower21"><a class="tower" href="#">อาคาร 20<i class="fas fa-caret-down"></i></a></div>
+                <div class="tower20"><a class="tower" href="#">อาคาร 21<i class="fas fa-caret-down"></i></a></div>
+                <div class="tower19"><a class="tower" href="#">อาคาร 19<i class="fas fa-caret-down"></i></a></div>
+                <div class="tower18"><a class="tower" href="#">อาคาร 18<i class="fas fa-caret-down"></i></a></div>
+                <div class="tower17"><a class="tower" href="#">อาคาร 17<i class="fas fa-caret-down"></i></a></div>
+                <div class="tower16"><a class="tower" href="#">อาคาร 16<i class="fas fa-caret-down"></i></a></div>
+            </div>
+            <div class="DateContainer">
+                <div class="Date">
+                    <span id="Days">Day: </span>
+                    <span id="Months">Month: </span>
+                    <span id="Years">Year</span>
+                </div>
+                <div class="clock">
+                    <span id="hours">00</span>
+                    <span>:</span>
+                    <span id="minutes">00</span>
+                    <span>:</span>
+                    <span id="seconds">00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-part">
+           <div class="homeimg">
+                <img src="/static/img/home.png" alt=""></div>
+        </div>
+    </div>
+
+    <script src="/static/Script/clock.js"></script>
+    <script src="/static/Script/date.js"></script>
+    <script src="/static/Script/search_his.js"></script>
+    <script src="/static/Script/map_api.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,470 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: "Kanit", serif;
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top-part {
+    display: flex;
+    align-items: center;
+    background-color: #F9B508;
+    width: 100%;
+    height: 85px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 45px;
+    background-color: white;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.logo img {
+    height: 85%;
+    width: 90%;
+}
+
+.list-tower {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 3%;
+}
+
+.list-tower div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 100%;
+    border-right: 2px solid black;
+}
+
+.tower21 {
+    position: relative;
+    display: inline-block;
+    /* border-left: 2px solid black; */
+}
+
+.tower {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.tower:hover {
+    text-decoration: none;
+    transform: scale(1.15);
+    background-color: white;
+}
+
+/* ปรับ dropdown ให้แสดงขึ้นมา */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 120px;
+    max-height: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+}
+
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+    width: auto;
+    height: auto;
+    text-decoration: underline;
+}
+
+.dropdown-content a:hover {
+    background-color: #faac1a;
+    border-radius: 5px;
+
+}
+
+/* ทำให้ dropdown แสดงเมื่อ hover */
+.tower21:hover .dropdown-content {
+    padding: 6px;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 300px;
+    z-index: 9999;
+}
+
+#T17:hover .dropdown-content  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 300px;
+    z-index: 9999;
+}
+
+.tower21 .dropdown-content{
+    display: none;
+}
+
+.DateContainer, .clock {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.Date {
+    background-color: #F9B508;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.clock {
+    background-color: #F9B508;
+    min-width: 80px;
+}
+
+
+/* =================================================================== */
+
+
+/* ส่วนของ .bottom-part */
+.bottom-part {
+   
+        min-height: calc(100vh - 85px); /* คำนวณให้ไม่เกินขนาดจอ */
+        display: grid;
+        grid-template-columns: 0.8fr 2.2fr;
+        overflow: hidden;
+    
+}
+
+.Side-part {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    /* background-color: rgb(255, 255, 255); */
+    padding: 20px;
+    border-right: 2px solid rgb(167, 167, 167);
+    height:75vh;
+    margin-top: 30px;
+    /* background-color: aqua; */
+    overflow: hidden;
+}
+
+/* ================================================================ */
+
+input[type="search"]{
+    border-radius: 8px;
+    border: none;
+    height: 45px;
+    width: 400px;
+    background-color: #F9B508;
+    font-family: "kanit","serif";
+    color: black;
+    padding-left: 50px;
+}
+input[type = "search"]::placeholder{
+    color: rgb(82, 82, 82);
+    padding-left: 5px;
+}
+input[type = "search"]:focus{
+    border: none;
+    appearance: none;
+    outline:none;
+}
+.search-bt{
+    position: relative;
+    left: -60px;
+    border: 0px;
+    cursor: pointer;
+    background: none;
+    transition: 0.5s;
+}
+.search-bt:hover{
+    transition: 0.3s;
+    transform: scale(1.15);
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+#icon-maps{
+    position: relative;
+    right: 386px;
+    font-size: 18px;
+}
+
+/* ====================================     search-area     ==================================== */
+
+.search-container{
+    position: relative;
+    width: 100%;
+    background-color: #F9B508;
+}
+.search-history{
+    padding: 15px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(212, 212, 212);
+    width: 75%;
+    height: 550px;
+    border-radius: 0px 0px 5px 5px ;
+    transition: 0.5s;
+}
+.history-item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    margin-left: 25px;
+    cursor: pointer;
+    border-bottom: 1px solid #808080; /* เส้นขีดแบ่งแต่ละรายการ */
+    width: 270px;
+}
+
+.no-history{
+    position: relative;
+    top: 200px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+                                    
+.delete-btn{
+    position: fixed;
+    left: 330px;
+}
+
+
+
+
+
+
+/* ============================Map-aprt======================= */
+.map-part {
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #634702; */
+    height: 100%;
+    width: 100%;
+}
+
+#map{
+    position: absolute;
+    top: 260px;
+    right: 100px;
+    height: 600px;
+    width: 1000px;
+}
+
+.btn-nav{
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    appearance: none;
+    outline: none;
+    background-color:#F9B508;
+    border: none;
+    cursor: pointer;
+}
+
+.sliding-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: -2000px;
+    background-color: white;
+    height: 80%;
+    width: 80%;
+    transition: right 0.7s ease-in-out;  /* แก้ไขจาก 0.5 เป็น 0.5s */
+    border: 2px solid #a7a6a6;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.container-part{
+    display: grid;
+    grid-template-rows: 20% 80%;
+    width: 100%;
+    height: 100%;
+}
+
+.top-part-in{
+    /* background-color: aqua; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-part-in img{
+    margin-top: 50px;
+}
+
+.bottom-part-in{
+    /* background-color: red; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottom-part-in img{
+    margin-top: -160px;
+    border-radius: 13px;
+    border: 2px solid #a8a7a7;
+    box-sizing: border-box;
+    box-shadow:1px black;
+}
+
+
+.container{
+    display: grid;
+    grid-template-rows: 10% 40% 50%;
+    height: 100%;
+    width: 100%;
+}
+.header{
+    background-color:  aqua;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+.img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    flex-wrap: wrap; /* ให้แสดงผลแบบหลายบรรทัด ถ้าหน้าจอเล็ก */
+    gap: 10px; /* ระยะห่างระหว่างกล่อง */
+    padding: 20px;
+    margin-right: 180px;
+}
+
+.info-building{
+    background-color: black;
+    display: flex;
+    color: white;
+    align-items: center;
+    padding-left: 200px;
+}
+
+.img-inside {
+    display: inline-block;  /* หรือใช้ display: block; */
+    background-color: aqua;
+    height: 200px;
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    line-height: 200px; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    font-size: 20px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================Responsive====================================== */
+
+/* Media Queries สำหรับมือถือ */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .top-part {
+        height: auto;
+        padding: 10px;
+    }
+
+    /* ปรับให้ .list-tower ใช้พื้นที่เต็ม */
+    .list-tower {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    /* ปรับให้ .bottom-part ใช้คอลัมน์เดียว */
+    .bottom-part {
+        grid-template-columns: 1fr;
+    }
+
+    .Side-part, .map-part {
+        padding: 15px;
+    }
+
+    .DateContainer, .clock {
+        margin-left: 10px;
+    }
+}
+
+/* Media Queries สำหรับแท็บเล็ต */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .bottom-part {
+        grid-template-columns: 1fr 1.5fr; /* ใช้สองคอลัมน์ แต่มีขนาดสมดุลมากขึ้น */
+    }
+
+    .Side-part, .map-part {
+        padding: 18px;
+    }
+}
