@@ -130,24 +130,16 @@
                 </div>
 
 
-
-
-                <!-- <p>🔹 คลิกบนแผนที่เพื่อเลือก <b>จุดเริ่มต้น</b></p>
-                <p>จุดเริ่มต้น: <span id="start-coords">ยังไม่เลือก</span></p>
-
-                <label for="end">เลือกจุดปลายทาง:</label>
-                <select id="end">
-                    {% for name in building_entries.keys() %}
-                    <option value="{{ name }}">{{ name }}</option>
-                    {% endfor %}
-                </select>
-
-                <button onclick="findRoute()" class="btn-nav"><i class="fas fa-directions" style="font-size: 30px;"></i></button>
-                <div id="map"></div> -->
                 <div class="sliding-info">
 
                     info tower
                 </div>
+                <div class="btn-navigation">
+                    <i class="fas fa-route"></i>
+                    <p class="paragraph">นำทาง</p>
+                </div>
+                
+                
             </div>
 
         </div>
@@ -162,7 +154,7 @@
 <script src="/static/Script/sliding.js"></script>
 <script src="/static/Script/test.js"></script>
 <!-- <script src="/static/Script/map_api.js"></script> -->
-<script>
+<!-- <script>
     const footways = JSON.parse('{{ footways|safe }}');
 
     const map = L.map('map', {
@@ -219,6 +211,6 @@
                 routeLayer = L.polyline(data.path_coords, { color: 'green', weight: 5 }).addTo(map);
             });
     }
-</script>
+</script> -->
 
 </html>

@@ -202,26 +202,14 @@ document.addEventListener("DOMContentLoaded", function () {
             slidingInfo.innerHTML = `
                         <div class="container">
                         <div class="header">ชื่ออาคาร ${building.id}</div>
-                        <div class="carousel">
-                            <input type="radio" name="carousel" id="slide-btn-1" class="slide-btn" onclick="setInt();" checked />
-                            <input type="radio" name="carousel" id="slide-btn-2" class="slide-btn" onclick="setInt();" />
-                            <input type="radio" name="carousel" id="slide-btn-3" class="slide-btn" onclick="setInt();" />
-                            <input type="radio" name="carousel" id="slide-btn-4" class="slide-btn" onclick="setInt();" />
-                            <input type="radio" name="carousel" id="slide-btn-5" class="slide-btn" onclick="setInt();" />    
-                            <div class img>    
-                                <span class="img-inside">1</span>
-                                <span class="img-inside">2</span>
-                                <span class="img-inside">3</span>
-                                <span class="img-inside">4</span>
-                            </div>
-                            <div class="labels">
-                                <label for="slide-btn-1"></label>
-                                <label for="slide-btn-2"></label>
-                                <label for="slide-btn-3"></label>
-                                <label for="slide-btn-4"></label>
-                                <label for="slide-btn-5"></label>
-                            </div>
+                        <div class="img">    
+                            <span class="img-inside">1</span>
+                            <span class="img-inside">2</span>
+                            <span class="img-inside">3</span>
+                            <span class="img-inside">4</span>
+                        </div>
                         <div class="info-building">รายละเอียดตึก</div>
+                        
                         </div>
                     `;
         });
@@ -249,3 +237,103 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const btnNav = document.querySelector(".btn-navigation");
+    const slidingInfo = document.querySelector(".sliding-info");
+
+    let map = null;
+    let startMarker = null;
+    let startCoords = null;
+    let routeLayer = null;
+
+    btnNav.addEventListener("click", function () {
+        let rightValue = getComputedStyle(slidingInfo).right;
+        console.log("ค่า right ปัจจุบัน:", rightValue);
+
+        if (rightValue === "0px") {
+            slidingInfo.style.right = "-1800px"; // ซ่อน
+            btnNav.style.visibility = "visible"; // แสดงปุ่ม
+        } else {
+            slidingInfo.style.right = "0"; // แสดง
+            btnNav.style.visibility = "hidden"; // ซ่อนปุ่ม
+
+            if (!document.getElementById("map")) {
+                slidingInfo.innerHTML = `
+                    <div class="container-title">
+                        <p id="name">ระบบนำทางภายนอก</p>
+                        <p id="title">🔹 คลิกบนแผนที่เพื่อเลือก <b>จุดเริ่มต้น</b></p>
+                        <p id="sec-title">จุดเริ่มต้น: <span id="start-coords">ยังไม่เลือก</span></p>
+                    </div>
+                    <label for="end">เลือกจุดปลายทาง:</label>
+                    <select id="end">
+                        {% for name in building_entries.keys() %}
+                        <option value="{{ name }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button id="btn-find-route" class="btn-nav">
+                        <i class="fas fa-directions" style="font-size: 30px;"></i>
+                    </button>
+                    <div id="map" style="height: 500px;"></div>
+                `;
+
+                map = L.map('map', {
+                    center: [13.868404, 100.482293],
+                    zoom: 18,
+                    dragging: true,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                map.on('click', function (e) {
+                    if (startMarker) {
+                        map.removeLayer(startMarker);
+                    }
+                    startCoords = [e.latlng.lat, e.latlng.lng];
+                    startMarker = L.marker(startCoords).addTo(map).bindPopup("จุดเริ่มต้น").openPopup();
+                    document.getElementById("start-coords").innerText = `${startCoords[0].toFixed(6)}, ${startCoords[1].toFixed(6)}`;
+                });
+
+                document.getElementById("btn-find-route").addEventListener("click", findRoute);
+            }
+        }
+        console.log("ค่า right ใหม่:", slidingInfo.style.right);
+    });
+
+    function findRoute() {
+        if (!startCoords) {
+            alert("กรุณาคลิกเลือกจุดเริ่มต้นบนแผนที่!");
+            return;
+        }
+
+        const end = document.getElementById('end').value;
+
+        fetch('/route', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ start: startCoords, end: end })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (routeLayer) map.removeLayer(routeLayer);
+            routeLayer = L.polyline(data.path_coords, { color: 'green', weight: 5 }).addTo(map);
+        });
+    }
+
+    document.addEventListener("click", function (event) {
+        if (!slidingInfo.contains(event.target) && !btnNav.contains(event.target)) {
+            slidingInfo.style.right = "-1800px"; // ซ่อน
+            btnNav.style.visibility = "visible"; // แสดงปุ่ม
+        }
+    });
+
+    slidingInfo.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+

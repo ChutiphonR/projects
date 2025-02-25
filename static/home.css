@@ -2,10 +2,11 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     font-family: "Kanit", serif;
     font-weight: 600;
     font-size: 14px;
+
 }
 
 main {
@@ -14,6 +15,20 @@ main {
     height: 100%;
 }
 
+.title-name{
+  margin-top: 50px;
+  margin-left: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Mitr",serif;
+  font-size:30px;
+  font-weight: 500;
+  background-color: #F9B508;
+  width: 820px;
+  height: 80px;
+  border-radius: 8px;
+}
 .top-part {
     display: flex;
     align-items: center;
@@ -56,7 +71,9 @@ main {
 }
 
 .tower21 {
-    border-left: 2px solid black;
+    position: relative;
+    display: inline-block;
+    /* border-left: 2px solid black; */
 }
 
 .tower {
@@ -68,7 +85,6 @@ main {
     transition: 0.2s ease;
     padding: 8px;
     border-radius: 5px;
-    height: 20px;
     text-align: center;
 }
 
@@ -76,8 +92,64 @@ main {
     text-decoration: none;
     transform: scale(1.15);
     background-color: white;
-    height: 10px;
-    text-align: center;
+}
+
+/* ปรับ dropdown ให้แสดงขึ้นมา */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 120px;
+    max-height: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+}
+
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+    width: auto;
+    height: auto;
+    text-decoration: underline;
+}
+
+.dropdown-content a:hover {
+    background-color: #F9B508;
+    border-radius: 5px;
+
+}
+
+/* ทำให้ dropdown แสดงเมื่อ hover */
+.tower21:hover .dropdown-content {
+    padding: 6px;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 300px;
+    z-index: 9999;
+}
+
+#T17:hover .dropdown-content  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 300px;
+    z-index: 9999;
+}
+
+.tower21 .dropdown-content{
+    display: none;
 }
 
 .DateContainer, .clock {
@@ -105,27 +177,97 @@ main {
 
 
 
-/* ==================================================================== */
-
-
-
-.bottom-part {
-    background-color: aqua;
+.background-img {
+    position: fixed;
+    top: 85px;
+    left: 0;
     width: 100%;
-    height: 90.8vh;
-    display: flex; /* ใช้ flexbox เพื่อให้ลูกอยู่เต็มพื้นที่ */
-    align-items: center;
+    height: calc(100vh - 85px);
+    background-color: #f0f0f0;
+    z-index: -99999;
+  }
+  
+  .background-img img {
+    width: 100%;
+    height: 100%;
+    /* ใช้ขนาดจริงของภาพแต่จำกัดไม่ให้เกินขนาดของ container */
+    z-index: -99999;
+    background-size: cover;
+  }
+  .title-main{
+    display: flex;
     justify-content: center;
-    overflow: hidden; /* ป้องกันรูปเกินขอบ */
-}
+    align-items: center;
+    margin-top: 70px;
+  }
+  
+.bottom-part input{
+    position: fixed;
+    right: 570px;
+    top: 450px;
+    appearance: none;
+    outline: none;
+    width: 700px;
+    height: 45px;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: "kanit",serif;
+    
+  }
 
-.homeimg {
-    width: 100%;
-    height: 100%;
-}
+  .bottom-part input::placeholder{
+    text-align: center;
+  }
 
-.homeimg img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
+  .button-area{
+    margin-top: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button-area button{
+    width: 150px;
+    padding:14px;
+    margin: 20px;
+    appearance: none;
+    outline: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: "kanit",serif;
+    font-weight: bold;
+    transition: 0.2s ease-in-out;
+
+  }
+  .button-area button:hover{
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    color: white;
+  }
+  #diagram{
+    background-color: #5A5A5A;
+    border:  1px solid rgb(97, 97, 97);
+    
+} 
+  #go{
+    background-color: #F9B508;
+    border:  1px solid #F9B508;
+    
+  }
+
+  a{
+    text-decoration: none;
+    appearance: none;
+    outline: none;
+    
+  }
+
+  /* สำหรับหน้าจอที่มีความกว้างน้อยกว่า 768px */
+  @media screen and (max-width: 768px) {
+    .background-img img {
+      width: 100%;
+      height: auto;
+    }
+  }
+

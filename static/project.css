@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -122,9 +123,9 @@ main {
     z-index: 9999;
 }
 
-#T17:hover .dropdown-content  {
+#T17:hover .dropdown-content {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 6px;
     border: none;
@@ -134,11 +135,12 @@ main {
     z-index: 9999;
 }
 
-.tower21 .dropdown-content{
+.tower21 .dropdown-content {
     display: none;
 }
 
-.DateContainer, .clock {
+.DateContainer,
+.clock {
     margin-left: 10px;
     display: flex;
     align-items: center;
@@ -167,12 +169,13 @@ main {
 
 /* ส่วนของ .bottom-part */
 .bottom-part {
-   
-        min-height: calc(100vh - 85px); /* คำนวณให้ไม่เกินขนาดจอ */
-        display: grid;
-        grid-template-columns: 0.8fr 2.2fr;
-        overflow: hidden;
-    
+
+    min-height: calc(100vh - 85px);
+    /* คำนวณให้ไม่เกินขนาดจอ */
+    display: grid;
+    grid-template-columns: 0.8fr 2.2fr;
+    overflow: hidden;
+
 }
 
 .Side-part {
@@ -183,7 +186,7 @@ main {
     /* background-color: rgb(255, 255, 255); */
     padding: 20px;
     border-right: 2px solid rgb(167, 167, 167);
-    height:75vh;
+    height: 75vh;
     margin-top: 30px;
     /* background-color: aqua; */
     overflow: hidden;
@@ -191,26 +194,29 @@ main {
 
 /* ================================================================ */
 
-input[type="search"]{
+input[type="search"] {
     border-radius: 8px;
     border: none;
     height: 45px;
     width: 400px;
     background-color: #F9B508;
-    font-family: "kanit","serif";
+    font-family: "kanit", "serif";
     color: black;
     padding-left: 50px;
 }
-input[type = "search"]::placeholder{
+
+input[type="search"]::placeholder {
     color: rgb(82, 82, 82);
     padding-left: 5px;
 }
-input[type = "search"]:focus{
+
+input[type="search"]:focus {
     border: none;
     appearance: none;
-    outline:none;
+    outline: none;
 }
-.search-bt{
+
+.search-bt {
     position: relative;
     left: -60px;
     border: 0px;
@@ -218,10 +224,12 @@ input[type = "search"]:focus{
     background: none;
     transition: 0.5s;
 }
-.search-bt:hover{
+
+.search-bt:hover {
     transition: 0.3s;
     transform: scale(1.15);
 }
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
@@ -229,7 +237,7 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
 }
 
-#icon-maps{
+#icon-maps {
     position: relative;
     right: 386px;
     font-size: 18px;
@@ -237,12 +245,13 @@ input[type="search"]::-webkit-search-results-decoration {
 
 /* ====================================     search-area     ==================================== */
 
-.search-container{
+.search-container {
     position: relative;
     width: 100%;
     background-color: #F9B508;
 }
-.search-history{
+
+.search-history {
     padding: 15px;
     margin-left: 15px;
     display: flex;
@@ -251,9 +260,10 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: rgb(212, 212, 212);
     width: 75%;
     height: 550px;
-    border-radius: 0px 0px 5px 5px ;
+    border-radius: 0px 0px 5px 5px;
     transition: 0.5s;
 }
+
 .history-item {
     display: flex;
     text-align: center;
@@ -262,11 +272,12 @@ input[type="search"]::-webkit-search-results-decoration {
     padding: 8px 12px;
     margin-left: 25px;
     cursor: pointer;
-    border-bottom: 1px solid #808080; /* เส้นขีดแบ่งแต่ละรายการ */
+    border-bottom: 1px solid #808080;
+    /* เส้นขีดแบ่งแต่ละรายการ */
     width: 270px;
 }
 
-.no-history{
+.no-history {
     position: relative;
     top: 200px;
     display: block;
@@ -274,8 +285,8 @@ input[type="search"]::-webkit-search-results-decoration {
     justify-content: center;
     text-align: center;
 }
-                                    
-.delete-btn{
+
+.delete-btn {
     position: fixed;
     left: 330px;
 }
@@ -297,21 +308,21 @@ input[type="search"]::-webkit-search-results-decoration {
     width: 100%;
 }
 
-#map{
+#map {
     position: absolute;
-    top: 260px;
-    right: 100px;
-    height: 600px;
+    top: 170px;
+    right: 200px;
+    height: 800px;
     width: 1000px;
 }
 
-.btn-nav{
+.btn-nav {
     border-radius: 50%;
     height: 70px;
     width: 70px;
     appearance: none;
     outline: none;
-    background-color:#F9B508;
+    background-color: #F9B508;
     border: none;
     cursor: pointer;
 }
@@ -325,69 +336,76 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: white;
     height: 80%;
     width: 80%;
-    transition: right 0.7s ease-in-out;  /* แก้ไขจาก 0.5 เป็น 0.5s */
+    transition: right 0.7s ease-in-out;
+    /* แก้ไขจาก 0.5 เป็น 0.5s */
     border: 2px solid #a7a6a6;
     border-radius: 8px 0px 0px 8px;
 }
 
-.container-part{
+.container-part {
     display: grid;
     grid-template-rows: 20% 80%;
     width: 100%;
     height: 100%;
 }
 
-.top-part-in{
+.top-part-in {
     /* background-color: aqua; */
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.top-part-in img{
+
+.top-part-in img {
     margin-top: 50px;
 }
 
-.bottom-part-in{
+.bottom-part-in {
     /* background-color: red; */
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.bottom-part-in img{
+
+.bottom-part-in img {
     margin-top: -160px;
     border-radius: 13px;
     border: 2px solid #a8a7a7;
     box-sizing: border-box;
-    box-shadow:1px black;
+    box-shadow: 1px black;
 }
 
 
-.container{
+.container {
     display: grid;
     grid-template-rows: 10% 40% 50%;
     height: 100%;
     width: 100%;
 }
-.header{
-    background-color:  aqua;
+
+.header {
+    background-color: aqua;
     display: flex;
     align-items: center;
     padding-left: 50px;
 }
+
 .img {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: red;
-    flex-wrap: wrap; /* ให้แสดงผลแบบหลายบรรทัด ถ้าหน้าจอเล็ก */
-    gap: 10px; /* ระยะห่างระหว่างกล่อง */
+    flex-wrap: wrap;
+    /* ให้แสดงผลแบบหลายบรรทัด ถ้าหน้าจอเล็ก */
+    gap: 10px;
+    /* ระยะห่างระหว่างกล่อง */
     padding: 20px;
     margin-right: 180px;
 }
 
-.info-building{
+.info-building {
     background-color: black;
     display: flex;
     color: white;
@@ -396,26 +414,105 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .img-inside {
-    display: inline-block;  /* หรือใช้ display: block; */
-    background-color: aqua;
+    display: inline-block;
+    /* หรือใช้ display: block; */
+    background-color: rgb(7, 255, 255);
     height: 200px;
     width: 200px;
     padding: 20px;
     text-align: center;
-    line-height: 200px; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    line-height: 200px;
+    /* จัดให้อยู่ตรงกลางแนวตั้ง */
     font-size: 20px;
 
 }
 
 
+.btn-navigation {
+    position: fixed;
+    right: 70px;
+    bottom: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #F9B508;
+    width: 62px;
+    height: 62px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    z-index: 1;
+    
+}
+
+.btn-navigation i {
+    font-size: 30px;
+}
+
+.btn-navigation:hover {
+    transform: scale(1.2);
+}
+
+
+.paragraph {
+    position: absolute;
+    top: 100%; /* ทำให้ p อยู่ใต้ปุ่ม */
+    left: 50%;
+    transform: translate(-50%, -10px);
+    background-color: #333;
+    color: white;
+    padding: 5px 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-size: 10px;
+    pointer-events: none; /* ป้องกันการโฟกัสไปที่ p */
+}
+
+.btn-navigation:hover .paragraph {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.btn-navigation.hidden {
+    display: none;
+}
 
 
 
+#title{
+    position: absolute;
+    top: 10px;
+    left: 1250px;
+}
+#sec-title{
+    position: absolute;
+    top: 30px;
+    left: 1270px;
 
+}
 
+#name{
+    position: absolute;
+    left: 60px;
+    font-size: 20px;
+}
 
-
-
+.container-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute; 
+    top: 0px;
+    left: 0px;
+    background-color:#F9B508 ;
+    width: 100%;
+    height: 10%;
+    border-radius: 7px 0px 0px 0px;
+    border-bottom: 2px solid brgb(141, 141, 141)
+}
 
 
 
@@ -449,11 +546,13 @@ input[type="search"]::-webkit-search-results-decoration {
         grid-template-columns: 1fr;
     }
 
-    .Side-part, .map-part {
+    .Side-part,
+    .map-part {
         padding: 15px;
     }
 
-    .DateContainer, .clock {
+    .DateContainer,
+    .clock {
         margin-left: 10px;
     }
 }
@@ -461,10 +560,22 @@ input[type="search"]::-webkit-search-results-decoration {
 /* Media Queries สำหรับแท็บเล็ต */
 @media (max-width: 1024px) and (min-width: 769px) {
     .bottom-part {
-        grid-template-columns: 1fr 1.5fr; /* ใช้สองคอลัมน์ แต่มีขนาดสมดุลมากขึ้น */
+        grid-template-columns: 1fr 1.5fr;
+        /* ใช้สองคอลัมน์ แต่มีขนาดสมดุลมากขึ้น */
     }
 
-    .Side-part, .map-part {
+    .Side-part,
+    .map-part {
         padding: 18px;
     }
+}
+
+
+
+
+
+.background-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
