@@ -137,6 +137,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="info-building"> 
             ${floorInfo.details}
         </div>
+        <div class="btn-navigation">
+            <i class="fas fa-route"></i>
+            <p class="paragraph">นำทาง</p>
+        </div>
         
     </div>
 `;
@@ -209,7 +213,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span class="img-inside">4</span>
                         </div>
                         <div class="info-building">รายละเอียดตึก</div>
-                        
+                        <div class="btn-navigation">
+                            <i class="fas fa-route"></i>
+                            <p class="paragraph">นำทาง</p>
+                        </div>    
                         </div>
                     `;
         });
@@ -236,8 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
     slidingInfo.addEventListener('click', function (event) {
         event.stopPropagation();
     });
-});
-document.addEventListener("DOMContentLoaded", function () {
+});document.addEventListener("DOMContentLoaded", function () {
     const btnNav = document.querySelector(".btn-navigation");
     const slidingInfo = document.querySelector(".sliding-info");
 
@@ -250,59 +256,62 @@ document.addEventListener("DOMContentLoaded", function () {
         let rightValue = getComputedStyle(slidingInfo).right;
         console.log("ค่า right ปัจจุบัน:", rightValue);
 
-        if (rightValue === "0px") {
-            slidingInfo.style.right = "-1800px"; // ซ่อน
-            btnNav.style.visibility = "visible"; // แสดงปุ่ม
-        } else {
-            slidingInfo.style.right = "0"; // แสดง
-            btnNav.style.visibility = "hidden"; // ซ่อนปุ่ม
-
+        if (rightValue === "-1800px") {
+            // แสดง slidingInfo
+            slidingInfo.style.right = "0";
+            btnNav.style.visibility = "hidden"; // ซ่อนปุ่มเมื่อแสดงเมนู
             if (!document.getElementById("map")) {
-                slidingInfo.innerHTML = `
-                    <div class="container-title">
-                        <p id="name">ระบบนำทางภายนอก</p>
-                        <p id="title">🔹 คลิกบนแผนที่เพื่อเลือก <b>จุดเริ่มต้น</b></p>
-                        <p id="sec-title">จุดเริ่มต้น: <span id="start-coords">ยังไม่เลือก</span></p>
-                    </div>
-                    <label for="end">เลือกจุดปลายทาง:</label>
-                    <select id="end">
-                        {% for name in building_entries.keys() %}
-                        <option value="{{ name }}">{{ name }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <button id="btn-find-route" class="btn-nav">
-                        <i class="fas fa-directions" style="font-size: 30px;"></i>
-                    </button>
-                    <div id="map" style="height: 500px;"></div>
-                `;
-
-                map = L.map('map', {
-                    center: [13.868404, 100.482293],
-                    zoom: 18,
-                    dragging: true,
-                    scrollWheelZoom: false,
-                    doubleClickZoom: false
-                });
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
-
-                map.on('click', function (e) {
-                    if (startMarker) {
-                        map.removeLayer(startMarker);
-                    }
-                    startCoords = [e.latlng.lat, e.latlng.lng];
-                    startMarker = L.marker(startCoords).addTo(map).bindPopup("จุดเริ่มต้น").openPopup();
-                    document.getElementById("start-coords").innerText = `${startCoords[0].toFixed(6)}, ${startCoords[1].toFixed(6)}`;
-                });
-
-                document.getElementById("btn-find-route").addEventListener("click", findRoute);
+                loadNavigationSystem();
             }
+        } else {
+            // ซ่อน slidingInfo
+            slidingInfo.style.right = "-1800px";
+            btnNav.style.visibility = "visible"; // แสดงปุ่มเมื่อซ่อนเมนู
         }
-        console.log("ค่า right ใหม่:", slidingInfo.style.right);
     });
+
+    function loadNavigationSystem() {
+        slidingInfo.innerHTML = `
+            <div class="container-title">
+                <p id="name">ระบบนำทางภายนอก</p>
+                <p id="title">🔹 คลิกบนแผนที่เพื่อเลือก <b>จุดเริ่มต้น</b></p>
+                <p id="sec-title">จุดเริ่มต้น: <span id="start-coords">ยังไม่เลือก</span></p>
+            </div>
+            <label for="end">เลือกจุดปลายทาง:</label>
+            <select id="end">
+                {% for name in building_entries.keys() %}
+                <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <button id="btn-find-route" class="btn-nav">
+                <i class="fas fa-directions" style="font-size: 30px;"></i>
+            </button>
+            <div id="map" style="height: 500px;"></div>
+        `;
+
+        map = L.map('map', {
+            center: [13.868404, 100.482293],
+            zoom: 18,
+            dragging: true,
+            scrollWheelZoom: false,
+            doubleClickZoom: false
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        map.on('click', function (e) {
+            if (startMarker) {
+                map.removeLayer(startMarker);
+            }
+            startCoords = [e.latlng.lat, e.latlng.lng];
+            startMarker = L.marker(startCoords).addTo(map).bindPopup("จุดเริ่มต้น").openPopup();
+            document.getElementById("start-coords").innerText = `${startCoords[0].toFixed(6)}, ${startCoords[1].toFixed(6)}`;
+        });
+
+        document.getElementById("btn-find-route").addEventListener("click", findRoute);
+    }
 
     function findRoute() {
         if (!startCoords) {
@@ -317,11 +326,11 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ start: startCoords, end: end })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (routeLayer) map.removeLayer(routeLayer);
-            routeLayer = L.polyline(data.path_coords, { color: 'green', weight: 5 }).addTo(map);
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (routeLayer) map.removeLayer(routeLayer);
+                routeLayer = L.polyline(data.path_coords, { color: 'green', weight: 5 }).addTo(map);
+            });
     }
 
     document.addEventListener("click", function (event) {
@@ -335,5 +344,6 @@ document.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
     });
 });
+
 
 

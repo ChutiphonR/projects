@@ -1,107 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Loop Carousel</title>
-    <link rel="stylesheet" href="/static/test.css">
+    <title>Search Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .placeholder-text {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #aaa;
+            transition: transform 0.4s ease-out, opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* เมื่อผู้ใช้พิมพ์หรือคลิกในช่อง input */
+        .search-input:focus + .placeholder-text,
+        .search-input:not(:placeholder-shown) + .placeholder-text {
+            transform: translateX(120px);
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="carousel">
-        <button id="prevBtn">❮</button>
-        <div class="card-img">
-            <ul class="card-list">
-                <!-- ภาพจะถูกเพิ่มผ่าน JavaScript -->
-            </ul>
-        </div>
-        <button id="nextBtn">❯</button>
+
+    <div class="search-container">
+        <input type="search" class="search-input" placeholder=" " id="search">
+        <label for="search" class="placeholder-text">ค้นหาสถานที่ที่ต้องการไป</label>
     </div>
-    <div class="pagination"></div>
 
-    <script>
-        const cardList = document.querySelector('.card-list');
-        const pagination = document.querySelector('.pagination');
-
-        let images = [1, 2, 3, 4, 5, 6]; // หมายเลขของรูป
-        let currentIndex = 1; // เริ่มต้นที่รูปแรก (แต่จริงๆ คือรูปที่ 2)
-        const itemsPerView = 3; // แสดง 3 รูป
-
-        // สร้างโครงสร้าง HTML โดยคัดลอกรูปแรกไปท้าย และรูปสุดท้ายไปหน้า
-        function generateCarousel() {
-            let tempImages = [...images];
-            tempImages.unshift(images[images.length - 1]); // เอาภาพสุดท้ายมาไว้หน้า
-            tempImages.push(images[0]); // เอาภาพแรกมาไว้ท้าย
-
-            tempImages.forEach((img, index) => {
-                let li = document.createElement("li");
-                li.classList.add("card-item");
-                li.innerHTML = `<img src="" alt="">${img}`;
-                cardList.appendChild(li);
-            });
-
-            // ตั้งค่าเริ่มต้นให้เลื่อนไปที่ index 1 (เลื่อนออกจาก dummy image ด้านซ้าย)
-            cardList.style.transform = `translateX(-${currentIndex * 620}px)`;
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            pagination.innerHTML = "";
-            for (let i = 0; i < images.length; i++) {
-                let dot = document.createElement("span");
-                dot.classList.add("dot");
-                if (i === (currentIndex - 1 + images.length) % images.length) {
-                    dot.classList.add("active");
-                }
-                pagination.appendChild(dot);
-            }
-        }
-
-        function nextSlide() {
-            currentIndex++;
-            cardList.style.transition = "transform 0.3s ease-in-out";
-            cardList.style.transform = `translateX(-${currentIndex * 620}px)`;
-
-            setTimeout(() => {
-                if (currentIndex >= images.length + 1) {
-                    cardList.style.transition = "none";
-                    currentIndex = 1;
-                    cardList.style.transform = `translateX(-${currentIndex * 620}px)`;
-                }
-                updatePagination();
-            }, 300);
-        }
-
-        function prevSlide() {
-            currentIndex--;
-            cardList.style.transition = "transform 0.3s ease-in-out";
-            cardList.style.transform = `translateX(-${currentIndex * 620}px)`;
-
-            setTimeout(() => {
-                if (currentIndex <= 0) {
-                    cardList.style.transition = "none";
-                    currentIndex = images.length;
-                    cardList.style.transform = `translateX(-${currentIndex * 620}px)`;
-                }
-                updatePagination();
-            }, 300);
-        }
-
-        let autoSlide = setInterval(nextSlide, 3000);
-
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            clearInterval(autoSlide);
-            nextSlide();
-            autoSlide = setInterval(nextSlide, 3000);
-        });
-
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            clearInterval(autoSlide);
-            prevSlide();
-            autoSlide = setInterval(nextSlide, 3000);
-        });
-
-        generateCarousel();
-    </script>
 </body>
 </html>
